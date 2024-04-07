@@ -1,5 +1,5 @@
-import Profile from "@/components/profile";
-import { getSession } from "@/lib/auth";
+import { Button } from "@/components/ui/button";
+import { getSession, logout } from "@/lib/auth";
 import { redirect } from "next/navigation";
 
 export default async function Home() {
@@ -7,9 +7,16 @@ export default async function Home() {
   if (!user) redirect("/auth");
   return (
     <div>
-      Logged in as : {user.email}
-      {/* client component below */}
-      <Profile />
+      <div>Logged in as : {user.email}</div>
+      <form
+        action={async () => {
+          "use server";
+          await logout();
+          redirect("/auth");
+        }}
+      >
+        <Button type="submit">Logout</Button>
+      </form>
     </div>
   );
 }

@@ -32,7 +32,6 @@ async function decrypt(token: string): Promise<any> {
 
 export async function login(credentials: UserCredentials) {
   // logic for verify user credentials from db
-
   // user from db
   const user = { email: credentials.email };
   const expires = new Date(Date.now() + 10 * 1000);
